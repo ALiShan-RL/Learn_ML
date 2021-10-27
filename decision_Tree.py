@@ -1,5 +1,8 @@
+import operator
 from math import log
-def calcShannonEnt(dataSet):  # 计算熵
+
+# 计算熵
+def calcShannonEnt(dataSet):
     numEntries = len(dataSet)
     labelCounts = {}
     for featVec in dataSet:
@@ -13,16 +16,28 @@ def calcShannonEnt(dataSet):  # 计算熵
         shannonEnt -= prob * log(prob,2)
     return shannonEnt
 
+
+# 生出数据集
 def createDataSet():
-    dataSet = [[1,1,'yes'],
-               [1,1,'yes'],
-               [1,0,'no'],
-               [0,1,'no'],
-               [0,1,'no']]
-    labels = ['no surfacing','flippers']
+    dataSet = [['青年', '否', '否', '一般', 'no'],
+               ['青年', '否', '否', '好', 'no'],
+               ['青年', '是', '否', '好', 'yes'],
+               ['青年', '是', '是', '一般', 'yes'],
+               ['青年', '否', '否', '一般', 'no'],
+               ['中年', '否', '否', '一般', 'no'],
+               ['中年', '否', '否', '好', 'no'],
+               ['中年', '是', '是', '好', 'yes'],
+               ['中年', '否', '是', '非常好', 'yes'],
+               ['中年', '否', '是', '非常好', 'yes'],
+               ['青年', '否', '是', '非常好', 'yes'],
+               ['青年', '否', '是', '好', 'yes'],
+               ['青年', '是', '否', '好', 'yes'],
+               ['青年', '是', '否', '非常好', 'yes'],
+               ['青年', '否', '否', '一般', 'no']]
+    labels = ['年龄', '有工作', '有自己的房子', '信贷情况']
     return dataSet,labels
 
-
+# 将数据集按照特征axis，并且该特征的值为value进行划分
 def splitDataSet(dataSet, axis, value):     # 使用了三个参数，待划分的数据集、划分的数据集特征、需要返回的特征的值
     retDataSet = []  # 返回特征值为value的数据集
     for featVec in dataSet:
@@ -32,6 +47,7 @@ def splitDataSet(dataSet, axis, value):     # 使用了三个参数，待划分�
             retDataSet.append(reducedFeatVec)
     return retDataSet
 
+# 运用信息增益选择最好的特征
 def chooseBestFeatureToSplit(dataSet):
     numFeatures = len(dataSet[0]) - 1     # 特征的数量 要减去最后的标签
     baseEntropy = calcShannonEnt(dataSet)  # 计算大数据集的熵
@@ -51,6 +67,34 @@ def chooseBestFeatureToSplit(dataSet):
     return bestFeature
 
 
+def majorityCnt(classList):
+    classCount={}
+    for vote in classList:
+        if vote in classCount.keys():
+            classCount[vote] = 0
+        classCount[vote] += 1
+    sortedClassCount = sorted(classCount.iteritems(),key=operator.itemgetter(1),reverse=True)
+    return sortedClassCount[0][0]
+
+# 创建决策树
+def createTree(dataSet, labels):
+    classList = [example[-1] for example in dataSet]
+    if classList.count(classList[0]) == len(classList):    # 如果类型一致则停止划分
+        return classList[0]
+    if len(dataSet[0]) == 1:                              #便利完
+        return majorityCnt(classList)
+    bestFeat = chooseBestFeatureToSplit(dataSet)
+    bestFeatLabel = labels[bestFeat]
+    myTree = {bestFeatLabel: {}}
+    del(labels[bestFeat])
+    featValues = [example[bestFeat] for example in dataSet]
+    uniqueVals = set(featValues)
+    for value in uniqueVals:
+        subLabels = labels[:]
+        myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet,bestFeat,value), subLabels)
+    return myTree
+
+
 
 
 myDat,labels = createDataSet()
@@ -60,3 +104,6 @@ print('myData的熵为' ,(calcShannonEnt(myDat)))
 print(splitDataSet(myDat,0,1))
 print(splitDataSet(myDat,0,0))
 print(chooseBestFeatureToSplit(myDat))  # 输出最好的特征
+
+myTree = createTree(myDat, labels)
+print(myTree)
