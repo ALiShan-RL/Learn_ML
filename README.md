@@ -1,9 +1,7 @@
-# The Sensory Neuron as a Transformer: Permutation-Invariant Neural Networks for Reinforcement Learning
+# Decision Tree
 
-<img width="100%" src="D:\ML_project\Learn_ML\pic\Figure_1.png"></img>
+<img width="100%" src="https://github.com/JLU21luojing/Learn_ML/blob/main/pic/Figure_1.png"></img>
 
-This is the code for our AttentionNeuron [paper](https://arxiv.org/abs/2109.02869).
-For more information, please refer to our [web site](https://attentionneuron.github.io/).
 
 ## Requirements
 
