@@ -44,7 +44,7 @@ plt.show()
 # houseDataSets = datasets.load_boston() # 利用sklearn中的房价数据
 #
 # print(houseDataSets)
-# 只是用了第13列的特征，一元线性规划
+# # 只是用了第13列的特征，一元线性规划
 # data_X = houseDataSets.data[:, np.newaxis, 12]     # np.newaxis是将数据增加维数，选择第13列的数据
 # data_Y = houseDataSets.target   # 输出数据
 # train_X, test_X,  train_Y, test_Y = train_test_split(data_X, data_Y, test_size=0.3)   # 70%的数据用来训练模型  30%数据用来测试模型
