@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # torch.manual_seed(1)    # reproducible
 
 x = torch.unsqueeze(torch.linspace(-2, 2, 100), dim=1)  # x data (tensor), shape=(100, 1)
-y = x.pow(4) + 0.2*torch.rand(x.size())                 # 造数据和加噪声
+y = x.pow(4) + 0.2 * torch.rand(x.size())                 # 造数据和加噪声
 
 # torch can only train on Variable, so convert them to Variable
 
