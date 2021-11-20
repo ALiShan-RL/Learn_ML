@@ -1,12 +1,17 @@
-# Decision Tree
+# 此部分为RL的伪代码总结
 
-<img width="60%" src="https://github.com/JLU21luojing/Learn_ML/blob/main/pic/Figure_1.png"></img>
+# DQN2013-NIPS
 
-# Logistic Regression
+<img width="50%" src="https://github.com/JLU21luojing/Learn_ML/blob/main/Pseudocode/2013-DQN.png"></img>
 
-<img width="60%" src="https://github.com/JLU21luojing/Learn_ML/blob/main/Logistic/result/logistic.png"></img>
+# DOUBLE-DQN
 
+<img width="50%" src="https://github.com/JLU21luojing/Learn_ML/blob/main/Pseudocode/Double-DQN.png"></img>
 
-## Requirements
+# DOUBLE-DQN-PER
 
-python version == 3.8
+<img width="50%" src="https://github.com/JLU21luojing/Learn_ML/blob/main/Pseudocode/Double-DQN-PER.png"></img>
+
+# DDPG
+
+<img width="50%" src="https://github.com/JLU21luojing/Learn_ML/blob/main/Pseudocode/DDPG.png"></img>
